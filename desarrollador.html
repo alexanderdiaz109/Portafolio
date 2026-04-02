@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Díaz | Data & Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        body {
+            background-color: #020617; /* Slate 950 */
+            color: #e2e8f0; /* Slate 200 */
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Abstract glowing background */
+        .bg-cyber {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
+            z-index: -2;
+        }
+
+        /* Connecting grid lines */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3, .nav-logo, .tech-font {
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22d3ee, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+        }
+
+        .tech-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.05) inset, 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Tech corner accents */
+        .tech-card::before, .tech-card::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tech-card::before {
+            top: -1px; left: -1px;
+            border-top-color: #22d3ee;
+            border-left-color: #22d3ee;
+        }
+        .tech-card::after {
+            bottom: -1px; right: -1px;
+            border-bottom-color: #22d3ee;
+            border-right-color: #22d3ee;
+        }
+
+        .tech-card:hover {
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15) inset, 0 0 20px rgba(6, 182, 212, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .tech-pill {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: #67e8f9;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.1) inset;
+        }
+
+        .hide-scroll-bar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .hide-scroll-bar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        .hide-scroll-bar::-webkit-scrollbar-thumb {
+            background: rgba(6, 182, 212, 0.3);
+            border-radius: 10px;
+        }
+        .hide-scroll-bar::-webkit-scrollbar-thumb:hover {
+            background: rgba(6, 182, 212, 0.6);
+        }
+        
+        .gallery-img {
+            transition: all 0.3s ease;
+            filter: grayscale(20%) brightness(0.9);
+        }
+        .gallery-img:hover {
+            filter: grayscale(0%) brightness(1.1);
+            border-color: #22d3ee;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+        }
+    </style>
+</head>
+
+<body class="relative">
+    <div class="bg-cyber"></div>
+    <div class="bg-grid"></div>
+
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-slate-950/80 backdrop-blur-md border-b border-cyan-800/50 shadow-[0_4px_30px_rgba(6,182,212,0.1)]">
+        <span class="text-2xl font-bold gradient-text tracking-widest nav-logo"><i class="fas fa-network-wired mr-2 text-cyan-400 text-lg"></i> AD_SYS</span>
+        <div class="space-x-8 text-sm hidden md:flex font-semibold text-cyan-100/70 tracking-widest">
+            <a href="#inicio" class="hover:text-cyan-400 transition-colors">INIT</a>
+            <a href="#proyectos" class="hover:text-cyan-400 transition-colors">PROYECTOS</a>
+            <a href="#experiencia" class="hover:text-cyan-400 transition-colors">LOGS</a>
+            <a href="#stack" class="hover:text-cyan-400 transition-colors">MODULES</a>
+        </div>
+        <a href="#contacto" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-slate-900 px-6 py-2 text-sm font-bold tracking-widest transition-all shadow-[0_0_10px_rgba(6,182,212,0.3)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]">CONNECT</a>
+    </nav>
+
+    <section id="inicio" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 relative z-10">
+        <div class="inline-block mb-4 px-4 py-1 border border-cyan-800 rounded bg-cyan-950/40 text-cyan-500 font-bold tracking-[0.3em] text-xs">STATUS: ONLINE ONLINE</div>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-wide drop-shadow-lg">SYSTEM <span class="gradient-text">ALEXANDER DÍAZ</span></h1>
+        <p class="text-xl md:text-3xl text-cyan-100 font-semibold mb-4 tracking-widest tech-font">SOFTWARE & DATA ENGINEER</p>
+        <p class="text-base md:text-xl text-slate-400 max-w-2xl mb-12 font-medium leading-relaxed">
+            Inicializando protocolos de desarrollo. Soy un TSU en Desarrollo de Software de 19 años. 
+            Me apasiona la estructuración de datos, arquitecturas escalables y soluciones operativas eficientes.
+        </p>
+        
+        <div class="flex gap-6 flex-wrap justify-center">
+            <a href="#proyectos" class="bg-cyan-600 text-slate-900 hover:bg-cyan-400 px-8 py-3 font-bold tracking-widest transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center gap-3 border border-cyan-400">
+                <i class="fas fa-folder-tree"></i> PROYECTOS
+            </a>
+            <a href="https://github.com/alexanderdiaz109" target="_blank" class="border border-cyan-700 bg-slate-900/50 hover:border-cyan-400 text-cyan-400 px-8 py-3 font-bold tracking-widest transition-all flex items-center gap-3">
+                <i class="fab fa-github"></i> GITHUB CORE
+            </a>
+        </div>
+    </section>
+
+    <section id="proyectos" class="py-24 px-6 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl text-cyan-400 font-bold tracking-widest mb-2"><i class="fas fa-folder-tree mr-3"></i>01 // PROYECTOS</h2>
+            <div class="h-1 w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent mx-auto"></div>
+        </div>
+
+        <div class="space-y-16">
+
+            <!-- SpotLight -->
+            <div class="tech-card rounded p-6 md:p-8 flex flex-col lg:flex-row gap-10 items-center group">
+                <!-- Info Column (Fixed width) -->
+                <div class="w-full lg:w-[45%] flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-cyan-800/50 pb-6 lg:pb-0 lg:pr-10">
+                    <div class="relative w-32 h-32 md:w-40 md:h-40 mb-6 p-2 rounded-full border border-cyan-500/50 bg-slate-900 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all">
+                        <img src="assets/Logo_spot.jpeg" class="w-full h-full object-cover rounded-full" alt="Logo SpotLight">
+                        <!-- Glowing dot ring -->
+                        <div class="absolute inset-0 rounded-full border border-cyan-400/20 animate-ping" style="animation-duration: 3s;"></div>
+                    </div>
+                    <h3 class="text-2xl tech-font font-bold text-cyan-300 mb-3 text-center tracking-wider">SpotLight (IA)</h3>
+                    <div class="text-slate-400 text-sm mb-6 text-left font-medium leading-relaxed space-y-3">
+                        <p><strong class="text-cyan-400">¿Qué es?:</strong> Es un sistema integral de evaluación de proyectos. Funciona como un ecosistema Full-Stack bajo una arquitectura Cliente-Servidor desacoplada.</p>
+                        <p><strong class="text-cyan-400">Tipo de Plataforma:</strong> Híbrida (App de Kiosko y Panel Web). La app del kiosko inmersiva está construida con Flutter e incluye animaciones cinematográficas, mientras que el panel administrativo ultrarrápido es web, creado con Vanilla JS. Todo está respaldado por un backend en C# (ASP.NET Core) y una base de datos en MongoDB Atlas.</p>
+                        <p><strong class="text-cyan-400">¿Qué soluciona?:</strong> Automatiza y estructura el análisis de métricas y la evaluación de proyectos a partir de reseñas en lenguaje natural.</p>
+                        <p><strong class="text-cyan-400">¿Cómo lo soluciona?:</strong> Integra el motor de Inteligencia Artificial Google Gemini 2.5 Flash mediante Prompt Engineering avanzado. La IA procesa las reseñas en lenguaje natural y extrae métricas estructuradas en un formato JSON determinista. Además, asegura la integridad de la información mediante una validación estricta de esquemas en MongoDB Atlas.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">C# .NET</span>
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">FLUTTER</span>
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">GEMINI AI</span>
+                    </div>
+
+                    <a href="https://github.com/alexanderdiaz109/SpotLite" target="_blank" class="mt-auto w-full text-center px-4 py-3 border border-cyan-700/80 text-cyan-500 hover:bg-cyan-500/10 transition-colors font-bold tracking-widest text-xs md:text-sm">
+                        <i class="fab fa-github mr-2"></i> OPEN MODULE
+                    </a>
+                </div>
+
+                <!-- Catalog Column (Dynamic width) -->
+                <div class="w-full lg:w-[55%] flex flex-col justify-center lg:pl-6">
+                    <h4 class="text-cyan-600 font-bold tracking-[0.3em] text-xs mb-4 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-cyan-800"></i> IMÁGENES DEL PROYECTO
+                        <span class="flex-grow h-px bg-cyan-900/50 ml-2"></span>
+                    </h4>
+                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scroll-bar">
+                        <img src="assets/spot1.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura SpotLight">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SubLegados Tours -->
+            <div class="tech-card rounded p-6 md:p-8 flex flex-col lg:flex-row gap-10 items-center group">
+                <!-- Info Column -->
+                <div class="w-full lg:w-[45%] flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-cyan-800/50 pb-6 lg:pb-0 lg:pr-10">
+                    <div class="relative w-32 h-32 md:w-40 md:h-40 mb-6 p-2 rounded-full border border-cyan-500/50 bg-slate-900 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all">
+                        <img src="assets/Logo_Sub.jpeg" class="w-full h-full object-cover rounded-full bg-black/50" alt="Logo SubLegados">
+                    </div>
+                    <h3 class="text-2xl tech-font font-bold text-cyan-300 mb-3 text-center tracking-wider">SubLegados Tours</h3>
+                    <div class="text-slate-400 text-sm mb-6 text-left font-medium leading-relaxed space-y-3">
+                        <p><strong class="text-cyan-400">¿Qué es?:</strong> Es una plataforma de turismo sostenible y un ecosistema digital diseñado para la gestión de turismo en Homún, Yucatán.</p>
+                        <p><strong class="text-cyan-400">Tipo de Plataforma:</strong> Web y Móvil. Construida con React, Flutter, Node.js, Express y PostgreSQL (Supabase).</p>
+                        <p><strong class="text-cyan-400">¿Qué soluciona?:</strong> Facilita la conexión entre guías locales y turistas de todo el mundo, al mismo tiempo que automatiza la gestión financiera de los recorridos.</p>
+                        <p><strong class="text-cyan-400">¿Cómo lo soluciona?:</strong> Mediante un sistema de reservaciones dinámico y perfiles diferenciados que cuentan con autenticación segura. A nivel técnico, resuelve la complejidad de los datos utilizando una base de datos relacional normalizada hasta la Tercera Forma Normal (3FN). Además, incorpora una lógica financiera automatizada encargada de calcular de manera precisa las comisiones para los guías.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">REACT</span>
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">NODE.JS</span>
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">POSTGRESQL</span>
+                    </div>
+
+                    <a href="https://github.com/alexanderdiaz109/AppSubLegadosTours.git" target="_blank" class="mt-auto w-full text-center px-4 py-3 border border-cyan-700/80 text-cyan-500 hover:bg-cyan-500/10 transition-colors font-bold tracking-widest text-xs md:text-sm">
+                        <i class="fab fa-github mr-2"></i> OPEN MODULE
+                    </a>
+                </div>
+
+                <!-- Catalog Column -->
+                <div class="w-full lg:w-[55%] flex flex-col justify-center lg:pl-6">
+                    <h4 class="text-cyan-600 font-bold tracking-[0.3em] text-xs mb-4 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-cyan-800"></i> IMÁGENES DEL PROYECTO [16]
+                        <span class="flex-grow h-px bg-cyan-900/50 ml-2"></span>
+                    </h4>
+                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scroll-bar">
+                        <img src="assets/sub1.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub2.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub3.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub4.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub5.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub6.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub7.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub8.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub9.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub10.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub11.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub12.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub13.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub14.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub15.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/sub16.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heladería Libertad -->
+            <div class="tech-card rounded p-6 md:p-8 flex flex-col lg:flex-row gap-10 items-center group">
+                <!-- Info Column -->
+                <div class="w-full lg:w-[45%] flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-cyan-800/50 pb-6 lg:pb-0 lg:pr-10">
+                    <div class="relative w-32 h-32 md:w-40 md:h-40 mb-6 p-2 rounded-full border border-cyan-500/50 bg-slate-900 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all">
+                        <img src="assets/Logo_heladeria.jpeg" class="w-full h-full object-cover rounded-full bg-slate-800" alt="Logo Heladería">
+                    </div>
+                    <h3 class="text-2xl tech-font font-bold text-cyan-300 mb-3 text-center tracking-wider">Heladería Libertad</h3>
+                    <div class="text-slate-400 text-sm mb-6 text-left font-medium leading-relaxed space-y-3">
+                        <p><strong class="text-cyan-400">¿Qué es?:</strong> Es un E-commerce y un sistema de gestión Serverless.</p>
+                        <p><strong class="text-cyan-400">Tipo de Plataforma:</strong> Aplicación Web (Single Page Application). Desarrollada con Angular, Supabase y Vercel.</p>
+                        <p><strong class="text-cyan-400">¿Qué soluciona?:</strong> Centraliza los pedidos en línea y la administración del inventario de la heladería en tiempo real, garantizando seguridad y alta disponibilidad sin necesidad de mantener un servidor tradicional.</p>
+                        <p><strong class="text-cyan-400">¿Cómo lo soluciona?:</strong> Emplea una arquitectura Serverless con despliegue continuo (CI/CD) a través de GitHub y Vercel. Para la gestión, cuenta con un panel de administración oculto que integra un "Monitor Radar" vía WebSockets, el cual notifica los pedidos entrantes con alertas sonoras en tiempo real. Para la seguridad, implementa políticas de Row Level Security (RLS) directamente en SQL para proteger las rutas administrativas y los datos sensibles.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">ANGULAR</span>
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">SUPABASE</span>
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">VERCEL</span>
+                    </div>
+
+                    <a href="https://github.com/alexanderdiaz109/Heladeria_Libertad" target="_blank" class="mt-auto w-full text-center px-4 py-3 border border-cyan-700/80 text-cyan-500 hover:bg-cyan-500/10 transition-colors font-bold tracking-widest text-xs md:text-sm">
+                        <i class="fab fa-github mr-2"></i> OPEN MODULE
+                    </a>
+                </div>
+
+                <!-- Catalog Column -->
+                <div class="w-full lg:w-[55%] flex flex-col justify-center lg:pl-6">
+                    <h4 class="text-cyan-600 font-bold tracking-[0.3em] text-xs mb-4 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-cyan-800"></i> IMÁGENES DEL PROYECTO [14]
+                        <span class="flex-grow h-px bg-cyan-900/50 ml-2"></span>
+                    </h4>
+                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scroll-bar">
+                        <img src="assets/hela1.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela2.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela3.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela4.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela5.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela6.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela7.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela8.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela9.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela10.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela11.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela12.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela13.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/hela14.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aether Gym -->
+            <div class="tech-card rounded p-6 md:p-8 flex flex-col lg:flex-row gap-10 items-center group">
+                <!-- Info Column -->
+                <div class="w-full lg:w-[45%] flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-cyan-800/50 pb-6 lg:pb-0 lg:pr-10">
+                    <div class="relative w-32 h-32 md:w-40 md:h-40 mb-6 p-2 rounded-full border border-cyan-500/50 bg-slate-900 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.2)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all">
+                        <img src="assets/Logo_Ae.jpeg" class="w-full h-full object-cover rounded-full" alt="Logo Aether Gym">
+                    </div>
+                    <h3 class="text-2xl tech-font font-bold text-cyan-300 mb-3 text-center tracking-wider">Aether Gym</h3>
+                    <div class="text-slate-400 text-sm mb-6 text-left font-medium leading-relaxed space-y-3">
+                        <p><strong class="text-cyan-400">¿Qué es?:</strong> Es un sistema de gestión deportiva y gamificación.</p>
+                        <p><strong class="text-cyan-400">Tipo de Plataforma:</strong> Aplicación Móvil. Desarrollada utilizando Flutter, Supabase e Isar/SQLite.</p>
+                        <p><strong class="text-cyan-400">¿Qué soluciona?:</strong> Fomenta la disciplina en los usuarios mediante el registro inmutable de su historial de fuerza, resolviendo el problema de la dependencia de una conexión a internet para entrenar.</p>
+                        <p><strong class="text-cyan-400">¿Cómo lo soluciona?:</strong> Implementa una robusta estrategia "Offline First", permitiendo el almacenamiento local en el dispositivo (Isar/SQLite) que luego se sincroniza en segundo plano con la base de datos principal al detectar conexión a internet. Usa una técnica de "Desacoplamiento Total" en la base de datos. Para retener a los usuarios, incluye un análisis de sobrecarga progresiva y un sistema de gamificación llamado "Guardián", además de un módulo social que genera IDs únicos automáticamente para crear competencia entre los miembros.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">FLUTTER</span>
+                        <span class="tech-pill text-[10px] md:text-xs px-3 py-1 rounded font-bold tracking-wider">ISAR / SQLITE</span>
+                    </div>
+
+                    <a href="https://github.com/alexanderdiaz109/AppAetherGym.git" target="_blank" class="mt-auto w-full text-center px-4 py-3 border border-cyan-700/80 text-cyan-500 hover:bg-cyan-500/10 transition-colors font-bold tracking-widest text-xs md:text-sm">
+                        <i class="fab fa-github mr-2"></i> OPEN MODULE
+                    </a>
+                </div>
+
+                <!-- Catalog Column -->
+                <div class="w-full lg:w-[55%] flex flex-col justify-center lg:pl-6">
+                    <h4 class="text-cyan-600 font-bold tracking-[0.3em] text-xs mb-4 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-cyan-800"></i> IMÁGENES DEL PROYECTO [7]
+                        <span class="flex-grow h-px bg-cyan-900/50 ml-2"></span>
+                    </h4>
+                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scroll-bar">
+                        <img src="assets/ae1.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/ae2.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/ae3.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/ae4.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/ae5.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/ae6.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                        <img src="assets/ae7.jpeg" class="h-80 md:h-[28rem] lg:h-[34rem] shrink-0 snap-center border border-slate-700 object-contain gallery-img rounded" loading="lazy" alt="Captura">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <section id="experiencia" class="py-24 bg-slate-950/90 relative z-10 border-y border-cyan-900/40">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+            <!-- Education -->
+            <div>
+                <h2 class="text-3xl text-cyan-400 font-bold tracking-widest mb-10 flex items-center border-b border-cyan-900/50 pb-4">
+                    <i class="fas fa-graduation-cap mr-4 text-cyan-600"></i>02 // LOGS_ACADÉMICOS
+                </h2>
+                
+                <div class="space-y-8 pl-4 border-l-2 border-cyan-800 relative">
+                    <div class="relative">
+                        <span class="absolute -left-[21px] top-1 w-4 h-4 bg-cyan-950 border-2 border-cyan-400 rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)]"></span>
+                        <div class="tech-card p-5 rounded">
+                            <h3 class="text-xl tech-font font-bold text-cyan-100 mb-1">Universidad Tecnológica Metropolitana</h3>
+                            <p class="text-cyan-500 text-sm font-bold tracking-widest mb-3">TSU EN DESARROLLO DE SOFTWARE</p>
+                            <p class="text-slate-400 text-sm flex items-center"><i class="far fa-clock mr-2 text-cyan-700"></i> 2024 - ACTUAL | MÉRIDA, YUCATÁN</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <span class="absolute -left-[21px] top-1 w-4 h-4 bg-slate-900 border-2 border-cyan-800 rounded-full"></span>
+                        <div class="tech-card p-5 rounded border-opacity-30">
+                            <h3 class="text-xl tech-font font-bold text-slate-300 mb-1">COBAY Plantel Santa Rosa</h3>
+                            <p class="text-cyan-700 text-sm font-bold tracking-widest mb-3">SISTEMAS COMPUTACIONALES</p>
+                            <p class="text-slate-500 text-sm flex items-center"><i class="far fa-clock mr-2 text-cyan-900"></i> 2020 - 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div>
+                <h2 class="text-3xl text-cyan-400 font-bold tracking-widest mb-10 flex items-center border-b border-cyan-900/50 pb-4">
+                    <i class="fas fa-briefcase mr-4 text-cyan-600"></i>03 // WORKSPACE_LOGS
+                </h2>
+                
+                <div class="tech-card p-6 rounded relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-cyan-500"></div>
+                    <h3 class="text-2xl tech-font font-bold text-cyan-100 mb-2">Soporte Técnico Independiente</h3>
+                    <p class="text-cyan-500 text-sm font-bold tracking-widest mb-4"><i class="fas fa-map-marker-alt mr-2 text-cyan-700"></i> TIMUCUY, YUCATÁN</p>
+                    <p class="text-slate-300 text-base leading-relaxed mb-4">
+                        Mantenimiento preventivo y correctivo de hardware/software en laptops. Actualización de sistemas
+                        operativos y resolución proactiva de problemas.
+                    </p>
+                    <div class="bg-cyan-950/30 p-3 rounded text-sm text-cyan-400 border border-cyan-900 inline-block font-mono">
+                        <i class="fas fa-check-circle mr-2"></i> Alta capacidad de diagnóstico
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Stack -->
+    <section id="stack" class="py-20 relative z-10 px-6 border-b border-t border-cyan-900/40 bg-[#060b14]/80">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-cyan-400 tracking-widest"><i class="fas fa-microchip mr-3"></i>04 // STACK TECNOLÓGICO</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="bg-[#0b1221] border border-cyan-500/30 rounded-lg p-8 text-center relative overflow-hidden group hover:border-cyan-400 transition-colors duration-300 shadow-[0_0_15px_rgba(6,182,212,0.1)] hover:shadow-[0_0_25px_rgba(6,182,212,0.2)]">
+                    <div class="absolute top-0 left-0 w-8 h-[2px] bg-cyan-400"></div>
+                    <div class="absolute top-0 left-0 w-[2px] h-8 bg-cyan-400"></div>
+                    <div class="absolute bottom-0 right-0 w-8 h-[2px] bg-cyan-400"></div>
+                    <div class="absolute bottom-0 right-0 w-[2px] h-8 bg-cyan-400"></div>
+
+                    <div class="w-14 h-14 mx-auto border border-cyan-500/40 rounded-lg flex items-center justify-center mb-6 bg-[#111a2e]">
+                        <i class="fas fa-code text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl tech-font font-extrabold text-cyan-100 mb-4 tracking-wider">CORE LANGUAGES</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-medium">
+                        JavaScript, TypeScript, Dart, C#, Python, Java, C++, PHP, HTML, CSS.
+                    </p>
+                </div>
+
+                <div class="bg-[#0b1221] border border-cyan-500/30 rounded-lg p-8 text-center relative overflow-hidden group hover:border-cyan-400 transition-colors duration-300 shadow-[0_0_15px_rgba(6,182,212,0.1)] hover:shadow-[0_0_25px_rgba(6,182,212,0.2)]">
+                    <div class="absolute top-0 left-0 w-8 h-[2px] bg-cyan-400"></div>
+                    <div class="absolute top-0 left-0 w-[2px] h-8 bg-cyan-400"></div>
+                    <div class="absolute bottom-0 right-0 w-8 h-[2px] bg-cyan-400"></div>
+                    <div class="absolute bottom-0 right-0 w-[2px] h-8 bg-cyan-400"></div>
+
+                    <div class="w-14 h-14 mx-auto border border-cyan-500/40 rounded-lg flex items-center justify-center mb-6 bg-[#111a2e]">
+                        <i class="fas fa-server text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl tech-font font-extrabold text-cyan-100 mb-4 tracking-wider">FRAMEWORKS & API</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-medium">
+                        Flutter, Angular, React, Next.js, Node.js, Express.js, Laravel, .NET Core, FastAPI, Serverless, CI/CD.
+                    </p>
+                </div>
+
+                <div class="bg-[#0b1221] border border-cyan-500/30 rounded-lg p-8 text-center relative overflow-hidden group hover:border-cyan-400 transition-colors duration-300 shadow-[0_0_15px_rgba(6,182,212,0.1)] hover:shadow-[0_0_25px_rgba(6,182,212,0.2)]">
+                    <div class="absolute top-0 left-0 w-8 h-[2px] bg-cyan-400"></div>
+                    <div class="absolute top-0 left-0 w-[2px] h-8 bg-cyan-400"></div>
+                    <div class="absolute bottom-0 right-0 w-8 h-[2px] bg-cyan-400"></div>
+                    <div class="absolute bottom-0 right-0 w-[2px] h-8 bg-cyan-400"></div>
+
+                    <div class="w-14 h-14 mx-auto border border-cyan-500/40 rounded-lg flex items-center justify-center mb-6 bg-[#111a2e]">
+                        <i class="fas fa-database text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl tech-font font-extrabold text-cyan-100 mb-4 tracking-wider">DATABASES & TOOLS</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-medium">
+                        PostgreSQL, MySQL, MongoDB, Firebase, Supabase, Isar/SQLite, Git, GitHub, Docker, Postman, VS Code, Gemini AI.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contacto" class="py-20 px-6 text-center border-t border-cyan-900/50 bg-slate-950 relative z-10">
+        <h2 class="text-3xl font-bold tracking-widest text-cyan-400 mb-4 tech-font">SYSTEM_CONNECT</h2>
+        <p class="text-slate-400 mb-10 max-w-lg mx-auto font-medium">Estableciendo conexión segura. Listo para integrarme a ecosistemas Full-Stack y Mobile aportando eficiencia y escalabilidad.</p>
+
+        <div class="flex justify-center gap-6 mb-12">
+            <a href="mailto:alexanderdiazucan@gmail.com" class="w-14 h-14 rounded-full border border-cyan-800 bg-slate-900 text-cyan-500 hover:bg-cyan-500 hover:text-slate-900 transition flex items-center justify-center text-xl shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/diaz-ucan-alexander-25b640380/" target="_blank" class="w-14 h-14 rounded-full border border-cyan-800 bg-slate-900 text-cyan-500 hover:bg-cyan-500 hover:text-slate-900 transition flex items-center justify-center text-xl shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/alexanderdiaz109" target="_blank" class="w-14 h-14 rounded-full border border-cyan-800 bg-slate-900 text-cyan-500 hover:bg-cyan-500 hover:text-slate-900 transition flex items-center justify-center text-xl shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="tel:9994969520" class="w-14 h-14 rounded-full border border-cyan-800 bg-slate-900 text-cyan-500 hover:bg-cyan-500 hover:text-slate-900 transition flex items-center justify-center text-xl shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+        <div class="font-mono text-xs text-cyan-900/60 tracking-widest">
+            <p>CONNECTION SECURE // END OF FILE</p>
+            <p class="mt-2 text-slate-600">© 2026 ALEXANDER DIAZ. ROOT: TIMUCUY, YUCATÁN, MÉXICO.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
